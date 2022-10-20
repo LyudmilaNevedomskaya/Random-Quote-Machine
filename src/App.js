@@ -11,21 +11,23 @@ function App() {
     author: ''
   })
   const [color, setColor] = useState('#395144')
-
+ 
   const getRandomColor = (colorsArr) => {
     const res = colorsArr[Math.floor(Math.random() * colorsArr.length)]
     return res;
   }
 
-  useEffect(() => {
-    getQuote()
-  }, [])
+
 
   const getQuote = async () => {
     try {
-      const data = await (await fetch(`https://zenquotes.io/api/random`)).json()
-      //console.log(data)
-      setQuote({ content: data[0].q, author: data[0].a })
+      //const data = await fetch(`https://zenquotes.io/api/random`).json()
+      const res = await fetch(`https://type.fit/api/quotes`)
+      const data = await res.json()
+      const quoteToDisplay = data[Math.floor(Math.random()*data.length)]
+      console.log('ALL',data)
+      console.log('ONE',quoteToDisplay)
+      setQuote({ content: quoteToDisplay.text, author: quoteToDisplay.author })
 
       setColor(getRandomColor(colors))
     } catch (err) {
@@ -35,6 +37,10 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    getQuote()
+  }, [])
+
   return (
     <div style={{ background: color }} className='wrapper'>
       <main style={{ background: color }} className='main-container'>
@@ -43,8 +49,8 @@ function App() {
           <p style={{ color: color }} id='author'>- {quote.author}</p>
           <div className='social-button-container'>
             <div className='social-container'>
-              <a style={{ color: color }} id='tweet-quote' href='https://twitter.com/intent/tweet' target="_blank" ><FontAwesomeIcon icon={faHeart} /></a>
-              <a style={{ color: color }} href='https://twitter.com/intent/tweet' target="_blank"><FontAwesomeIcon icon={faPoo} /></a>
+              <a style={{ color: color }} id='tweet-quote' href='https://twitter.com/intent/tweet' target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faHeart} /></a>
+              <a style={{ color: color }} href='https://twitter.com/intent/tweet' target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faPoo} /></a>
             </div>
             <button style={{ background: color }} id='new-quote' onClick={getQuote}>New Quote</button>
           </div>
