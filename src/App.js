@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee, faSquareNfi, faQuoteRight } from '@fortawesome/free-solid-svg-icons'
 import './App.css';
 
 function App() {
@@ -9,13 +11,13 @@ function App() {
   return (
     <main className='main-container'>
       <div id='quote-box' className="App">
-        <p>{quote.content}</p>
-        <p>- {quote.author}</p>
+        <p id='text'><FontAwesomeIcon icon={faQuoteRight} /> {quote.content}</p>
+        <p id='author'>- {quote.author}</p>
         <div>
-          <a>twitter</a>
-          <a>tumblr</a>
+          <a><FontAwesomeIcon icon={faSquareNfi} /></a>
+          <a><FontAwesomeIcon icon={faCoffee} /></a>
         </div>
-        <button>New Quote</button>
+        <button id='new-quote'>New Quote</button>
       </div>
       <span>by Mila</span>
     </main>
