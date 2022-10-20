@@ -7,8 +7,8 @@ const colors = ['#E0144C', '#FF5858', '#3C4048', '#815B5B', '#3F0071', '#150050'
 
 function App() {
   const [quote, setQuote] = useState({
-    content: 'You become what you believe.',
-    author: 'Oprah Winfrey'
+    content: '',
+    author: ''
   })
   const [color, setColor] = useState('#395144')
 
@@ -17,15 +17,21 @@ function App() {
     return res;
   }
 
-  const handleClick = async () => {
+  useEffect(() => {
+    getQuote()
+  }, [])
+
+  const getQuote = async () => {
     try {
       const data = await (await fetch(`https://zenquotes.io/api/random`)).json()
-      console.log(data)
+      //console.log(data)
       setQuote({ content: data[0].q, author: data[0].a })
 
       setColor(getRandomColor(colors))
     } catch (err) {
       console.log('ERROR', err.message)
+      setQuote({ content: 'An Error occured while getting a quote', author: 'Try Again' })
+      setColor('red')
     }
   }
 
@@ -40,7 +46,7 @@ function App() {
               <a style={{ color: color }} id='tweet-quote' href='https://twitter.com/intent/tweet' target="_blank" ><FontAwesomeIcon icon={faHeart} /></a>
               <a style={{ color: color }} href='https://twitter.com/intent/tweet' target="_blank"><FontAwesomeIcon icon={faPoo} /></a>
             </div>
-            <button style={{ background: color }} id='new-quote' onClick={handleClick}>New Quote</button>
+            <button style={{ background: color }} id='new-quote' onClick={getQuote}>New Quote</button>
           </div>
         </div>
         <span>by Mila</span>
