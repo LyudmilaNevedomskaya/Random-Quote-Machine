@@ -5,7 +5,7 @@ import './App.css';
 
 const colors = ['#E0144C', '#FF5858', '#3C4048', '#815B5B', '#3F0071', '#150050', '#FF731D', '#628E90', '#905E96', '#DD5353', '#372948', '#38E54D', '#2192FF', '#FF74B1'];
 
-function App() {
+export default function App() {
   const [quote, setQuote] = useState({
     content: '',
     author: ''
@@ -60,5 +60,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
