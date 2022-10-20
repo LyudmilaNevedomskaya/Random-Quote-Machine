@@ -34,6 +34,28 @@ body {
   font-weight: 400;
   text-align: end;
 }
+.social-container {
+  display: flex;
+  gap: 10px;
+}
+.social-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.social-button-container a {
+  text-decoration: none;
+  color: aquamarine;
+  font-size: 25px;
+}
+#new-quote {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color: var(--white);
+  background-color: aquamarine;
+}
 span {
   color: var(--white);
   margin-top: 10px;
